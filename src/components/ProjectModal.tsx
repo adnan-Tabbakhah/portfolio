@@ -19,36 +19,54 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
-      gsap.fromTo(overlayRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3 }
-      );
-      gsap.fromTo(contentRef.current,
-        { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)" }
-      );
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    if (!isOpen) return;
+
+    gsap.fromTo(
+      overlayRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.3 },
+    );
+    gsap.fromTo(
+      contentRef.current,
+      { scale: 0.9, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)" },
+    );
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div
-      ref={overlayRef}
-      className="modal-overlay active"
-      onClick={onClose}
-    >
+    <div ref={overlayRef} className="modal-overlay active" onClick={onClose}>
       <div
         ref={contentRef}
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="modal-close" onClick={onClose}>×</button>
-        <h2 className="text-4xl font-black mb-4 gradient-text">{project.title}</h2>
+        <button className="modal-close" onClick={onClose}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-x"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <h2 className="text-4xl font-black mb-4 gradient-text">
+          {project.title}
+        </h2>
         <p className="text-lg mb-6  text-(--text-muted) leading-relaxed">
           {project.description}
         </p>
@@ -87,4 +105,3 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
 };
 
 export default ProjectModal;
-

@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
-      <div className="flex flex-col gap-32 pt-24 px-4 sm:px-6 lg:px-8 pb-12">
+      <div className="flex flex-col  pt-24 px-4 sm:px-6 lg:px-8 pb-12">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
