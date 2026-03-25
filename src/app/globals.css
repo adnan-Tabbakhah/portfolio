@@ -376,3 +376,33 @@ h3 {
 
 
 
+/* Gradient Text */
+.name {
+  background: linear-gradient(
+    135deg,
+    var(--strawberry-red),
+    #ff6b6b,
+    #ff8e53,
+    var(--mahogany-red-bright),
+    #bd5123,
+    var(--mahogany-red)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  background-size: 280% 280%;
+  animation: gradientTextShift 4.5s linear infinite;
+}
+
+@keyframes gradientTextShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
