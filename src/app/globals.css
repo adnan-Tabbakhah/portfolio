@@ -13,9 +13,8 @@
   --dust-grey: #d3d3d3;
   --white-smoke: #f5f3f4;
   --white: #ffffff;
-  --border-dark :#7b7b6a;
-  
-  
+  --border-dark: #7b7b6a;
+
   --background: var(--white);
   --foreground: var(--black);
   --card-bg: var(--white-smoke);
@@ -23,7 +22,6 @@
   --accent-dark: var(--mahogany-red);
   --text-muted: var(--carbon-black);
   --border: var(--dust-grey);
-  
 }
 
 [data-theme="dark"] {
@@ -51,8 +49,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
+  font-family:
+    var(--font-geist-sans),
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  transition:
+    background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s;
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
@@ -83,7 +88,7 @@ h3 {
 .section-container {
   background: var(--card-bg);
   border-radius: 2rem;
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.1),
     0 0 0 1px rgba(229, 56, 59, 0.05);
   backdrop-filter: blur(20px);
@@ -96,13 +101,17 @@ h3 {
 }
 
 .section-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--strawberry-red), var(--mahogany-red));
+  background: linear-gradient(
+    90deg,
+    var(--strawberry-red),
+    var(--mahogany-red)
+  );
   opacity: 0.6;
 }
 
@@ -134,8 +143,9 @@ h3 {
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fade-in.visible {
@@ -153,14 +163,18 @@ h3 {
 .card-hover:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: var(--strawberry-red);
-  box-shadow: 
+  box-shadow:
     0 30px 80px rgba(229, 56, 59, 0.2),
     0 0 0 2px rgba(229, 56, 59, 0.2);
 }
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--strawberry-red), var(--mahogany-red));
+  background: linear-gradient(
+    135deg,
+    var(--strawberry-red),
+    var(--mahogany-red)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -168,7 +182,11 @@ h3 {
 
 /* Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, var(--strawberry-red), var(--mahogany-red));
+  background: linear-gradient(
+    135deg,
+    var(--strawberry-red),
+    var(--mahogany-red)
+  );
   color: var(--white);
   padding: 1rem 2.5rem;
   border-radius: 50px;
@@ -190,7 +208,7 @@ h3 {
 }
 
 .btn-primary::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -199,7 +217,9 @@ h3 {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .btn-primary:hover::before {
@@ -279,4 +299,77 @@ h3 {
 .modal-close:hover {
   transform: rotate(90deg);
   background: var(--mahogany-red);
+}
+
+/* Animated gradient border demo (scoped; avoids overriding global styles) */
+@property --projects-demo-angle {
+  syntax: "<angle>";
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --projects-demo-gradX {
+  syntax: "<percentage>";
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --projects-demo-gradY {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: true;
+}
+
+.animated-border {
+  --projects-demo-d: 2500ms;
+  --projects-demo-angle: 90deg;
+  --projects-demo-gradX: 100%;
+  --projects-demo-gradY: 50%;
+  --projects-demo-c1: rgba(168, 239, 255, 1);
+  --projects-demo-c2: rgba(168, 239, 255, 0.1);
+}
+
+.animated-border .box {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  border: 0.35rem solid transparent;
+
+  border-image: conic-gradient(
+      from var(--projects-demo-angle),
+      var(--projects-demo-c2),
+      var(--projects-demo-c1) 0.1turn,
+      var(--projects-demo-c1) 0.15turn,
+      var(--projects-demo-c2) 0.25turn
+    )
+    30;
+  animation: projectsDemoBorderRotate var(--projects-demo-d) linear infinite
+    forwards;
+}
+
+@keyframes projectsDemoBorderRotate {
+  100% {
+    --projects-demo-angle: 420deg;
+  }
+}
+
+@keyframes projectsDemoBorderRadial {
+  20% {
+    --projects-demo-gradX: 100%;
+    --projects-demo-gradY: 50%;
+  }
+  40% {
+    --projects-demo-gradX: 100%;
+    --projects-demo-gradY: 100%;
+  }
+  60% {
+    --projects-demo-gradX: 50%;
+    --projects-demo-gradY: 100%;
+  }
+  80% {
+    --projects-demo-gradX: 0%;
+    --projects-demo-gradY: 50%;
+  }
+  100% {
+    --projects-demo-gradX: 50%;
+    --projects-demo-gradY: 0%;
+  }
 }

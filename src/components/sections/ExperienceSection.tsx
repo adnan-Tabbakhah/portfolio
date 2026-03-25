@@ -15,7 +15,7 @@ const ExperienceSection = () => {
         "Implemented role-based access and dashboard controls for better security and UX",
         "Worked with Web3 and smart contracts on blockchain integrations",
         "Wrote clear documentation and user guides",
-        "Ensured quality using Playwright and Jest for testing"
+        "Ensured quality using Playwright and Jest for testing",
       ],
       type: "experience" as const
     },
