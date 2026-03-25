@@ -168,7 +168,7 @@ const HeroSection = () => {
 
         {/* Name with gradient */}
         <h1 ref={nameRef} className="mb-4">
-          <span className="gradient-text">Adnan Tabbakhah</span>
+          <span className="gradient-texts">Adnan Tabbakhah</span>
         </h1>
 
         {/* Title */}
